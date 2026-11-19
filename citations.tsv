@@ -1,0 +1,28 @@
+tag	start	end	sha256	what
+59e255c4	134	135	09e7b3c5c63e963a408042a1a0304d9a5249fd39a7e08da4bf59ea467f29f3ed	pre import exec; post execFile, spawn
+59e255c4	143	145	7df909907adf7d297ca4c0c173f66becc065516d631f430df97d1c5e8518dc47	pre: this.system shell strings for rev-parse/fetch
+59e255c4	146	148	e6f1464721dbd6363d558d31ae4c54648aacfee518c49b11277c52f4071842ca	v1: this.git argv for rev-parse/fetch
+59e255c4	151	151	568219d29012edccb61f273fcf561c78fec013de850a13e748cad0d33ba9f462	pre: git checkout ${head.ref} in a shell string
+59e255c4	152	152	e7cd2b964700923cf44a268946c4e7c1b76735e5646c890b699b88812eb58b0d	v1: git checkout head.ref as an argv slot
+59e255c4	157	158	848804b18f31099cc85f1898f6a8d67493d706ecb02d9c931e615e55358b936a	pre: merge shell string interpolates base.ref
+59e255c4	159	167	49c24bd6184ed6352fce5ffb9b3b596a2ddf2e766b321cbe94911d400418dfad	v1: merge via argv (dummy@conflibot.invalid is the upstream placeholder)
+59e255c4	174	176	ba2d6be183cdedc9fc39945b6b09d240d41de2e1c9cc1f73f5ee9848070c31ab	pre: format-patch..apply pipe in one shell string, interpolates target.head.ref
+59e255c4	181	185	80467d766a740203f3cd48b419cf8a6b823df85ee8fc03a7309a2d1d6bbd895a	v1: format-patch argv still uses origin/${target.head.ref}
+59e255c4	237	237	d4a3320209772fda822bf7845e905b1fb5de67531323f62475cb20a933c21a2a	pre: system(command: string) via exec
+59e255c4	238	240	ae5662a959a4cc1f0e21f09067197da0cfbe614ee94ed7dc859775f2293f7aee	v1: git(...args) comment: argument array, no shell
+59e255c4	244	247	f686a52d6923b4833c90eaf6b0dd21b23e0d72e0cc5c0a306069fb7a1e39ebfb	v1: execFile("git", args)
+59e255c4	265	265	caabe73dd6c398972a01879881f182c5e49be96160d8e1e20e9acf6e746ec967	v1: spawn("git", ["apply", "--check"])
+0107ac6a	140	141	c83a1b3acf69b85990c26835cf9564d3046c8b671a805b8064ac693285fde2c1	pre import exec; v2 execFile, spawn from node:child_process
+0107ac6a	152	154	7df909907adf7d297ca4c0c173f66becc065516d631f430df97d1c5e8518dc47	pre: this.system shell strings for rev-parse/fetch
+0107ac6a	155	157	e6f1464721dbd6363d558d31ae4c54648aacfee518c49b11277c52f4071842ca	v2: this.git argv for rev-parse/fetch
+0107ac6a	159	170	fcd53895e1954a47abab436ea92060d3cb090a6f02c9793aa22fa7f123a4e1f0	v2: fetch refs/pull/<n>/head by PR number only
+0107ac6a	173	173	568219d29012edccb61f273fcf561c78fec013de850a13e748cad0d33ba9f462	pre: git checkout ${head.ref} in a shell string
+0107ac6a	175	175	187b066e92a18a063344e8ab4c672f2cfe3b69315a0bb0506e0ca75dbbd94d8b	v2: checkout --detach origin/pr/${number}
+0107ac6a	180	181	848804b18f31099cc85f1898f6a8d67493d706ecb02d9c931e615e55358b936a	pre: merge shell string interpolates base.ref
+0107ac6a	182	190	49c24bd6184ed6352fce5ffb9b3b596a2ddf2e766b321cbe94911d400418dfad	v2: merge via argv (still origin/${base.ref})
+0107ac6a	197	199	ba2d6be183cdedc9fc39945b6b09d240d41de2e1c9cc1f73f5ee9848070c31ab	pre: format-patch..apply pipe interpolates target.head.ref
+0107ac6a	204	207	3edd00e953b843a50809f037e71a7f83a0b813ea4609e06754ae9ddeaae6bb90	v2: format-patch origin/${base}..origin/pr/${target.number}
+0107ac6a	257	257	d4a3320209772fda822bf7845e905b1fb5de67531323f62475cb20a933c21a2a	pre: system(command: string) via exec
+0107ac6a	258	260	ae5662a959a4cc1f0e21f09067197da0cfbe614ee94ed7dc859775f2293f7aee	v2: git(...args) comment: argument array, no shell
+0107ac6a	265	268	f686a52d6923b4833c90eaf6b0dd21b23e0d72e0cc5c0a306069fb7a1e39ebfb	v2: execFile("git", args)
+0107ac6a	286	286	caabe73dd6c398972a01879881f182c5e49be96160d8e1e20e9acf6e746ec967	v2: spawn("git", ["apply", "--check"])

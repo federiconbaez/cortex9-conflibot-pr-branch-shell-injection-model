@@ -1,0 +1,15 @@
+[project]
+name = "cortex9-conflibot-pr-branch-shell-injection-model"
+version = "0.1.0"
+description = "Offline, inert model of the conflibot PR branch-name shell injection fix (CVE-2026-55158)"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "UP", "SIM", "RUF"]
+ignore = ["SIM905", "SIM110"]

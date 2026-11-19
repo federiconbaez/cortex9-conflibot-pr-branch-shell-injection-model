@@ -1,0 +1,140 @@
+{
+ "note": "Hand-written. Inert strings; git and shells are never executed. 'id' is a harmless marker command name, as in other models of this series.",
+ "cases": [
+  {
+   "id": "p01_semicolon",
+   "class": "pos",
+   "head_ref": "main;id",
+   "base_ref": "main",
+   "target_head_ref": "main;id",
+   "pull_number": 1,
+   "target_number": 2,
+   "expected": {
+    "pre": "SHELL_METACHAR",
+    "v1": "ARGV_SAFE",
+    "v2": "NUMERIC_REF"
+   },
+   "why": "semicolon in head.ref is interpolated into the pre checkout and format-patch shell strings (59e255c4:L151, 59e255c4:L174-176)"
+  },
+  {
+   "id": "p02_backticks",
+   "class": "pos",
+   "head_ref": "`id`",
+   "base_ref": "main",
+   "target_head_ref": "`id`",
+   "pull_number": 3,
+   "target_number": 4,
+   "expected": {
+    "pre": "SHELL_METACHAR",
+    "v1": "ARGV_SAFE",
+    "v2": "NUMERIC_REF"
+   },
+   "why": "backticks named by GHSA-2qvg-qr73-mqxp"
+  },
+  {
+   "id": "p03_dollar_paren",
+   "class": "pos",
+   "head_ref": "$(id)",
+   "base_ref": "main",
+   "target_head_ref": "$(id)",
+   "pull_number": 5,
+   "target_number": 6,
+   "expected": {
+    "pre": "SHELL_METACHAR",
+    "v1": "ARGV_SAFE",
+    "v2": "NUMERIC_REF"
+   },
+   "why": "$( ) substitution named by the advisory"
+  },
+  {
+   "id": "p04_pipe",
+   "class": "pos",
+   "head_ref": "feat|id",
+   "base_ref": "main",
+   "target_head_ref": "feat|id",
+   "pull_number": 7,
+   "target_number": 8,
+   "expected": {
+    "pre": "SHELL_METACHAR",
+    "v1": "ARGV_SAFE",
+    "v2": "NUMERIC_REF"
+   },
+   "why": "pipe in head.ref under a shell"
+  },
+  {
+   "id": "p05_ampersand",
+   "class": "pos",
+   "head_ref": "feat&id",
+   "base_ref": "main",
+   "target_head_ref": "feat&id",
+   "pull_number": 9,
+   "target_number": 10,
+   "expected": {
+    "pre": "SHELL_METACHAR",
+    "v1": "ARGV_SAFE",
+    "v2": "NUMERIC_REF"
+   },
+   "why": "& in head.ref under a shell"
+  },
+  {
+   "id": "p06_target_only",
+   "class": "pos",
+   "head_ref": "clean-head",
+   "base_ref": "main",
+   "target_head_ref": "other;id",
+   "pull_number": 11,
+   "target_number": 12,
+   "expected": {
+    "pre": "SHELL_METACHAR",
+    "v1": "ARGV_SAFE",
+    "v2": "NUMERIC_REF"
+   },
+   "why": "the format-patch pipe interpolates target.head.ref of another PR (59e255c4:L174-176); current head.ref is clean"
+  },
+  {
+   "id": "n01_main",
+   "class": "neg",
+   "head_ref": "main",
+   "base_ref": "main",
+   "target_head_ref": "topic",
+   "pull_number": 13,
+   "target_number": 14,
+   "expected": {
+    "pre": "CLEAN",
+    "v1": "ARGV_SAFE",
+    "v2": "NUMERIC_REF"
+   },
+   "why": "ordinary branch names; pre still uses a shell but there is no metacharacter"
+  },
+  {
+   "id": "n02_feature_slash",
+   "class": "neg",
+   "head_ref": "feature/login",
+   "base_ref": "main",
+   "target_head_ref": "feature/login",
+   "pull_number": 15,
+   "target_number": 16,
+   "expected": {
+    "pre": "CLEAN",
+    "v1": "ARGV_SAFE",
+    "v2": "NUMERIC_REF"
+   },
+   "why": "a slash is a normal branch character, not a shell metacharacter"
+  },
+  {
+   "id": "o01_base_ref_meta",
+   "class": "observation",
+   "head_ref": "topic",
+   "base_ref": "main;id",
+   "target_head_ref": "topic",
+   "pull_number": 17,
+   "target_number": 18,
+   "expected": {
+    "pre": "SHELL_METACHAR",
+    "v1": "ARGV_SAFE",
+    "v2": "NUMERIC_REF"
+   },
+   "why": "pre also interpolates base.ref in the merge and format-patch strings. The advisory's stated vector is head.ref under pull_request_target; this is a model observation, not a separate finding. v2 still places origin/${base.ref} in the merge argv (0107ac6a:L182-190) but not through a shell."
+  }
+ ]
+}

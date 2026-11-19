@@ -1,0 +1,10 @@
+class,version,outcome,n
+neg,pre,CLEAN,2
+neg,v1,ARGV_SAFE,2
+neg,v2,NUMERIC_REF,2
+observation,pre,SHELL_METACHAR,1
+observation,v1,ARGV_SAFE,1
+observation,v2,NUMERIC_REF,1
+pos,pre,SHELL_METACHAR,6
+pos,v1,ARGV_SAFE,6
+pos,v2,NUMERIC_REF,6
